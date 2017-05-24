@@ -1,0 +1,56 @@
+[user]
+  name = John Bush
+  email = johnb@piquantsoftware.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[merge]
+  conflictstyle = diff3
+[core]
+  pager = diff-so-fancy | less --tabs=4 -RFX
+[push]
+  default = simple
+  followTags = true	
+[pull]
+  rebase = true
+  ff = only
+[stash]
+  showPatch = true
+[rebase]
+  autostash = true
+[log]
+  # Better date formats in logs
+  date = rfc 
+  decorate = full
+[status]
+  showUntrackedFiles = all
+[transfer]
+  fsckobjects = true
+[alias]
+  # Show number of commits from all authors.
+  stats = shortlog -sn
+  # Show detailed logs
+  graph = log --graph --decorate --stat --date=iso --all
+  # Show simplified logs
+  overview = log --oneline --no-merges
+  recap = log --oneline --no-merges --author=johnb@piquantsoftware.com
+  # See today’s work
+  today = log --since=\"00:00:00\" --all --no-merges --oneline --author=johnb@piquantsoftware.com
+  # Empty line between results from different files.
+  find = "!git grep --break -C1"
+  # Show your ten most recently checked out branches
+  recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+  # Compare commits in one branch against another, e.g. $ git compare tkt-0021 to develop
+  compare = "!f() { git log --oneline $1..$2;  }; f"
+  # See which commits are on your local branch that aren’t on the remote
+  local = "! git log --oneline --no-merges origin/$(git rev-parse --abbrev-ref HEAD).."
+  # See which commits are on the remote that aren’t on your local branch
+  upstream = "! git fetch && git log --oneline --no-merges ..origin/$(git rev-parse --abbrev-ref HEAD)"
+[help]
+  autocorrect = 1
+[credential]
+  helper = osxkeychain
